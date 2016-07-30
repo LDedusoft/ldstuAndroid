@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="red">#fc0101</color>
+    <color name="green">#4cfc01</color>
+    <color name="white">#ffffff</color>
+    <color name="gray">#bcbcbc</color>
+    <color name="black">#000000</color>
+    <color name="yello">#ffff00</color>
+    <color name="bottom_text_selected">#ffffff</color>
+    <color name="bottom_text_unselected">#82858b</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="loginBackground">#f3f1f6</color><!-- 登录页面背景色-->
+    <color name="loginButton">#56adf9</color><!-- 登录按钮颜色-->
+    <color name="loginText">#b5bccc</color><!-- 登录页面文字颜色-->
+    <color name="loginLine">#b6bdcd</color><!-- 登录页面线条颜色-->
+    <color name="loginInputLeftLine">#50cb3b</color><!-- 登录页面输入框左侧的竖线-->
+    <color name="bottomBarBackground">#f9f9f9</color> <!-- 下工具栏背景色-->
+    <color name="bottomBarText">#929292</color><!-- 下工具栏文字颜色-->
+    <color name="bootomBarTextSelected">#2c415b</color><!-- 下工具栏文字选中颜色-->
+    <color name="homeTitleTextWhite">#ffffff</color><!-- 首页标题文字颜色-->
+    <color name="homeTitleText2">#a4ffffff</color><!-- 首页标题文字颜色-->
+    <color name="menuText">#cccccc</color><!--菜单文字颜色-->
+    <color name="menuListItemText">#474753</color><!--菜单列表文字颜色-->
+    <color name="menuDelete">#ff0000</color><!--菜单移除按钮背景色-->
+    <color name="menuTop">#c6c6c6</color><!--菜单置顶按钮背景色-->
+    <color name="topBarBackground">#1a5075</color>
+    <color name="inputListItemText">#797988</color><!--输入表单文字颜色-->
+    <color name="inputListItemHint">#b8bfce</color><!--输入表单提示文字颜色-->
+    <color name="inputListItemCheckbox">#50cb3b</color><!--输入表单复选框颜色-->
+    <color name="welcomePassBtn">#a5cccccc</color><!--欢迎页面登录按钮背景色-->
+    <color name="menuItemGroupBackground">#eaedf0</color><!--菜单栏分组背景色-->
+    <color name="commonQueryConditionText">#2b2c30</color><!--通用查询条件文字颜色-->
+    <color name="commonQueryConditionLine">#c7d2ea</color><!-- 通用查询条件分割线颜色-->
+    <color name="commonQueryConditionBackground">#f0eef4</color> <!-- 通用查询条件栏背景色-->
+    <color name="exe_line">#f2f2f2</color><!--练习页面线条颜色-->
+    <color name="ldstu_top_bar_bck">#1cabf7</color><!--标题栏背景-->
+    <color name="fav_icon_select">#d0f902</color><!--收藏选中-->
+    <color name="fav_icon_unselect">#bbe0f4</color><!--收藏未选中-->
+    <color name="answer_item_text_color">#394f64</color><!--答案选项字体颜色-->
+    <color name="toast_back_color">#bbe5e7e9</color><!--toast-->
+    <color name="toast_text_color">#ec2e3448</color><!--toast-->
+    <color name="kaoshi_line">#ec969696</color><!--考试查询页面分割线-->
+</resources>

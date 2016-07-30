@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.ldedusoft.ldstu">
+
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <application
+        android:name=".Application.MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".activity.LoginActivity"
+            android:launchMode="singleTask"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+       <!-- <activity android:name=".activity.LoginActivity"></activity>
+       -->
+       <!-- <activity android:name=".activity.LoginActivity"
+            android:launchMode="singleTask"
+            >
+            <intent-filter>
+                <action android:name="activity.LoginActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>-->
+        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.home.HomeActivity"></activity><!--首页-->
+        <activity android:name=".viewpagerfragment.FragmentMainActivity"></activity>
+        <activity android:name=".activity.answer.AnswerActivity">
+            <intent-filter>
+                <action android:name="activity.answer.AnswerActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+
+
+    </application>
+
+</manifest>

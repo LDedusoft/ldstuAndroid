@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/menuItemGroupBackground"
+    >
+<!--整车管理-->
+    <LinearLayout
+        android:id="@+id/wholecar_top_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true">
+        <com.ldedusoft.ldstu.component.customComp.TopBar
+            android:id="@+id/wholecar_top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.ldedusoft.ldstu.component.customComp.TopBar>
+    </LinearLayout>
+
+    <!--列表  -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/wholecar_top_bar_layout"
+        android:layout_above="@+id/wholecar_bottom_bar_layout"
+        >
+        <ListView
+            android:id="@+id/wholecar_menu_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ListView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/wholecar_bottom_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        >
+        <com.ldedusoft.ldstu.component.customComp.BottomBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.ldedusoft.ldstu.component.customComp.BottomBar>
+
+    </LinearLayout>
+</RelativeLayout>

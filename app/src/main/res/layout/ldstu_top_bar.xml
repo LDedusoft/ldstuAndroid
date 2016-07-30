@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="@dimen/top_bar_height"
+    android:background="@color/ldstu_top_bar_bck"
+    >
+    <LinearLayout
+        android:id="@+id/form_tool_bar_back_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/top_bar_height"
+        android:orientation="horizontal"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:visibility="invisible"
+        >
+        <TextView
+            android:id="@+id/form_tool_bar_back"
+            android:layout_width="@dimen/inputList_topBar_imgWidth"
+            android:layout_height="@dimen/inputList_topBar_imgHeight"
+            android:background="@drawable/top_bar_back"
+            android:layout_marginRight="5dp"
+            />
+        <TextView
+            android:text="@string/form_toolbar_back"
+            android:id="@+id/form_tool_bar_text"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/inputList_topBar_textViewHeight"
+            android:textSize="@dimen/inputList_topBar_text"
+            android:gravity="center_vertical"
+            android:textColor="@color/homeTitleTextWhite"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+        <TextView
+            android:id="@+id/top_bar_title"
+            android:text="Title"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/top_bar_height"
+            android:textSize="@dimen/top_menu_text_size"
+            android:textColor="@color/homeTitleTextWhite"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginRight="@dimen/top_menu_icon_width"
+            />
+
+    </LinearLayout>
+</LinearLayout>

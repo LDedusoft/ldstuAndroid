@@ -1,0 +1,70 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- Application theme. -->
+
+
+    <!-- 自定义View样式 -->
+
+    <style name="main_bottom_bar_linear">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/bottom_bar_height</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="main_bottom_bar_image">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">30dp</item>
+    </style>
+
+    <style name="main_bottom_bar_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#82858b</item>
+    </style>
+
+    <style name="RadioButtonStylesA">
+        <item name="android:button">@drawable/radio_a</item>
+    </style>
+    <style name="RadioButtonStylesB">
+        <item name="android:button">@drawable/radio_b</item>
+    </style>
+    <style name="RadioButtonStylesC">
+        <item name="android:button">@drawable/radio_c</item>
+    </style>
+    <style name="RadioButtonStylesD">
+        <item name="android:button">@drawable/radio_d</item>
+    </style>
+
+    <style name="CheckBoxStyleA" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/check_style_a</item>
+    </style>
+    <style name="CheckBoxStyleB" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/check_style_b</item>
+    </style>
+    <style name="CheckBoxStyleC" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/check_style_c</item>
+    </style>
+    <style name="CheckBoxStyleD" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/check_style_d</item>
+    </style>
+
+</resources>

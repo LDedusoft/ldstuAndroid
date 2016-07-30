@@ -1,0 +1,66 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="top_goback_width">60dp</dimen>
+    <dimen name="top_gonext_width">60dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="delete_action_len">120dp</dimen><!-- 菜单侧滑距离 -->
+    <dimen name="menu_delete_btn">60dp</dimen><!-- 菜单删除按钮尺寸 -->
+    <dimen name="menu_item_height">60dp</dimen><!-- 菜单子项高度 -->
+    <dimen name="menu_foot_height">40dp</dimen><!-- 菜单底部添加快捷功能区域高度 -->
+    <dimen name="menu_group_height">45dp</dimen><!-- 菜单分组区域高度 -->
+    <dimen name="menu_foot_icon">15dp</dimen><!-- 菜单底部添加快捷功能按钮尺寸 -->
+    <dimen name="menu_item_icon">40dp</dimen><!-- 菜单图标尺寸 -->
+    <dimen name="menu_button_width">60dp</dimen><!-- 菜单按钮宽度 -->
+    <dimen name="bottom_bar_icon_height">45dp</dimen><!-- 底工具栏图标区域高度 -->
+    <dimen name="bottom_bar_btn_size">30dp</dimen> <!-- 底工具栏按钮尺寸 -->
+    <dimen name="bottom_bar_btn_icon_size">28sp</dimen> <!-- 底工具栏矢量图尺寸 -->
+    <dimen name="bottom_bar_btn_icon_car_size">30sp</dimen> <!-- 整车图尺寸 -->
+    <dimen name="bottom_bar_height">55dp</dimen><!-- 底工具栏整体高度 -->
+    <dimen name="top_bar_height">45dp</dimen><!--顶部工具栏高度-->
+    <dimen name="top_bar_right_button_width">50dp</dimen><!--顶部工具栏右侧按钮宽度-->
+
+    <dimen name="top_menu_icon_width">50dp</dimen><!--顶部工具栏菜单图片宽度-->
+    <dimen name="top_menu_icon_height">40dp</dimen><!--顶部工具栏菜单图片高度-->
+    <dimen name="top_menu_text_size">17sp</dimen><!--顶部工具栏文字尺寸-->
+    <dimen name="input_list_item_height">50dp</dimen><!--输入表单item高度-->
+
+    <dimen name="input_list_item_point">10dp</dimen><!--输入表单item必选图片尺寸-->
+    <dimen name="input_list_item_addIcon">20dp</dimen><!--输入表单item 添加配件图片尺寸-->
+    <dimen name="input_list_item_title_width">120dp</dimen><!--输入表单标题宽度-->
+    <dimen name="input_list_item_fix_addtitle_width">90dp</dimen><!--输入表单特殊item添加标题宽度-->
+    <dimen name="input_list_item_fix_height">80dp</dimen><!--输入表单特殊item高度-->
+    <dimen name="input_list_item_fix_del_btn">50dp</dimen><!--输入表单特殊item高度-->
+    <dimen name="input_list_item_fix_sub_height">35dp</dimen><!--输入表单特殊item子项高度-->
+    <dimen name="input_list_item_fix_title_width">80dp</dimen><!--输入表特殊item单标题宽度-->
+    <dimen name="input_list_item_fix_text">15sp</dimen><!--输入表特殊item文字-->
+    <dimen name="input_list_item_text">17sp</dimen><!--输入表单文字-->
+    <dimen name="input_list_item_textedit_width">140dp</dimen><!--输入表单文字框宽度-->
+    <dimen name="input_list_item_unit_width">60dp</dimen><!--输入表单单位宽度-->
+    <dimen name="inputList_topBar_imgHeight">20dp</dimen> <!--表单工具条 图片高度-->
+    <dimen name="inputList_topBar_textViewHeight">22dp</dimen> <!--表单工具条文字高度-->
+    <dimen name="inputList_topBar_imgWidth">10dp</dimen> <!--表单工具条 图片宽度-->
+    <dimen name="inputList_topBar_text">17sp</dimen><!--输入表单工具栏文字大小-->
+    <dimen name="page_bar_height">40dp</dimen> <!--页码工具栏高度-->
+
+    <dimen name="commonQuery_item_height">60dp</dimen> <!--通用列表item高度-->
+    <dimen name="commonQuery_item_title_width">150dp</dimen> <!--通用列表标题宽度-->
+    <dimen name="commonQuery_item_action_width">60dp</dimen> <!--通用列详情按钮宽度-->
+    <dimen name="commonQuery_condition_height">40dp</dimen> <!--通用列表 查询栏高度-->
+    <dimen name="commonQuery_condition_textsize">15dp</dimen> <!--通用列表 查询栏高度-->
+
+    <dimen name="exercises_top_height">200dp</dimen> <!--练习页面上半部高度-->
+    <dimen name="exercises_top_sub_height">100dp</dimen> <!--练习页面上半部子元素高度-->
+    <dimen name="exercises_bar_height">80dp</dimen> <!--练习页面中间工具栏高度-->
+    <dimen name="exercises_middle_btn">120dp</dimen> <!--练习页面中间按钮尺寸-->
+    <dimen name="exercises_middle_space">50dp</dimen> <!--练习页面中间间隔宽度-->
+    <dimen name="exercises_type_item_height">60dp</dimen> <!--练习页面 练习类型item高度-->
+    <dimen name="exercises_icon_size">35dp</dimen> <!--练习页面 练习类型item高度-->
+    <dimen name="answer_item_height">60dp</dimen> <!--答题页面 选项高度-->
+    <dimen name="answer_item_text_size">16sp</dimen> <!--答题页面 选项字体大小-->
+    <dimen name="toast_height">40dp</dimen> <!--toast高度-->
+    <dimen name="exq_query_item_height">70dp</dimen> <!--考试查询item高度-->
+
+
+</resources>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainweixin"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#eee"
+    android:orientation="vertical" >
+
+
+    <RelativeLayout
+        android:id="@+id/main_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_bar_height"
+        android:layout_alignParentBottom="true"
+        android:background="@color/bottomBarBackground"
+        android:orientation="vertical" >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/loginLine"
+            ></RelativeLayout>
+        <ImageView
+            android:id="@+id/img_tab_now"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:scaleType="matrix"
+            android:src="@drawable/tab_back"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:paddingBottom="2dp" >
+
+            <LinearLayout
+                android:id="@+id/tab1Layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical" >
+
+                <com.ldedusoft.ldstu.component.iconfont.IconfontView
+                    android:id="@+id/img_weixin"
+                    android:text="@string/icon_bottomBar_yonghu"
+                    android:textColor="@color/bottomBarText"
+                    android:textSize="@dimen/bottom_bar_btn_icon_size"
+                    android:layout_width="@dimen/bottom_bar_btn_size"
+                    android:layout_height="@dimen/bottom_bar_btn_size" />
+
+                <TextView
+                    android:id="@+id/bottombar_txt_userinfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="用户信息"
+                    android:textColor="@color/bottom_text_unselected"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical" >
+
+                <com.ldedusoft.ldstu.component.iconfont.IconfontView
+                    android:id="@+id/img_address"
+                    android:text="@string/icon_bottomBar_lianxi"
+                    android:textColor="@color/bottomBarText"
+                    android:textSize="@dimen/bottom_bar_btn_icon_size"
+                    android:layout_width="@dimen/bottom_bar_btn_size"
+                    android:layout_height="@dimen/bottom_bar_btn_size" />
+
+                <TextView
+                    android:id="@+id/bottombar_txt_shiti"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="试题练习"
+                    android:textColor="@color/bottom_text_unselected"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical" >
+
+                <com.ldedusoft.ldstu.component.iconfont.IconfontView
+                    android:id="@+id/img_friends"
+                    android:text="@string/icon_bottomBar_kaoshi"
+                    android:textColor="@color/bottomBarText"
+                    android:textSize="@dimen/bottom_bar_btn_icon_size"
+                    android:layout_width="@dimen/bottom_bar_btn_size"
+                    android:layout_height="@dimen/bottom_bar_btn_size" />
+
+
+                <TextView
+                    android:id="@+id/bottombar_txt_kaoshi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="考试查询"
+                    android:textColor="@color/bottom_text_unselected"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical" >
+
+                <com.ldedusoft.ldstu.component.iconfont.IconfontView
+                    android:id="@+id/img_settings"
+                    android:text="@string/icon_bottomBar_bisai"
+                    android:textColor="@color/bottomBarText"
+                    android:textSize="@dimen/bottom_bar_btn_icon_size"
+                    android:layout_width="@dimen/bottom_bar_btn_size"
+                    android:layout_height="@dimen/bottom_bar_btn_size" />
+
+                <TextView
+                    android:id="@+id/bottombar_txt_bisai"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="比赛查询"
+                    android:textColor="@color/bottom_text_unselected"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/main_bottom"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
+
+        <com.ldedusoft.ldstu.viewpagerfragment.MainViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center" />
+    </LinearLayout>
+
+</RelativeLayout>

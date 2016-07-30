@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--登录下拉列表-->
+    <string-array name="loginType_array">
+        <item>练习</item>
+
+    </string-array>
+    <!--菜单配置-->
+    <string-array name="home_menu_item">
+        <item>预约维修</item>
+        <item>维修接待</item>
+        <item>配件销售单</item>
+        <item>维修进度查询</item>
+        <item>车辆信息查询</item>
+        <item>客户信息查询</item>
+    </string-array>
+    <string-array name="repair_menu_item">
+        <item>服务group</item>
+        <item>预约维修</item>
+        <item>维修接待</item>
+        <item>查询group</item>
+        <item>维修进度查询</item>
+        <item>车辆信息查询</item>
+        <item>客户信息查询</item>
+    </string-array>
+    <string-array name="car_menu_item">
+        <item>制单group</item>
+        <item>洽谈单</item>
+        <item>销售单</item>
+        <item>查询group</item>
+        <item>在库车辆查询</item>
+        <item>计算group</item>
+        <item>车险计算</item>
+        <item>车贷计算</item>
+    </string-array>
+    <string-array name="negotiate_menu_item">
+        <item>制单group</item>
+        <item>个人洽谈</item>
+        <item>公司洽谈</item>
+    </string-array>
+    <string-array name="part_menu_item">
+        <item>制单group</item>
+        <item>配件销售单</item>
+        <item>配件采购单</item>
+        <item>新建配件单</item>
+        <item>查询group</item>
+        <item>配件库存</item>
+        <item>采购计划</item>
+    </string-array>
+
+    <string-array name="report_menu_item">
+        <item>综合统计group</item>
+        <item>经营统计</item>
+        <item>库存统计</item>
+        <item>维修统计</item>
+        <item>收款统计</item>
+        <item>客户账务统计</item>
+        <item>进货统计group</item>
+        <item>进货汇总</item>
+        <item>采购订单</item>
+        <item>供应商累计供货排行</item>
+        <item>销售统计group</item>
+        <item>销售计划分析表</item>
+        <item>客户销售额排行</item>
+        <item>日期销售报表</item>
+        <item>仓库销售排行</item>
+    </string-array>
+
+    <!--选择列表配置-->
+    <string-array name="oil_amount">
+        <item>满</item>
+        <item>3/4</item>
+        <item>1/2</item>
+        <item>1/4</item>
+        <item>空</item>
+    </string-array>
+    <string-array name="oil_quality">
+        <item>98</item>
+        <item>97</item>
+        <item>95</item>
+        <item>93</item>
+        <item>92</item>
+        <item>90</item>
+    </string-array>
+    <string-array name="insurance_com">
+        <item>平安车险</item>
+        <item>人保车险</item>
+        <item>太平洋车险</item>
+        <item>阳光车险</item>
+        <item>安邦车险</item>
+    </string-array>
+    <string-array name="client_type"><!--个人洽谈  客户类型-->
+        <item>私人</item>
+        <item>公务</item>
+        <item>商用</item>
+    </string-array>
+    <string-array name="buying_plan"><!--个人洽谈  购车方案-->
+        <item>新购</item>
+        <item>二手车</item>
+        <item>增购</item>
+    </string-array>
+    <string-array name="buying_time"><!--个人洽谈  预购时间-->
+        <item>一个月内</item>
+        <item>三个月内</item>
+        <item>六个月内</item>
+    </string-array>
+
+    <string-array name="input_sex"><!--性别-->
+        <item>男</item>
+        <item>女</item>
+    </string-array>
+
+    <string-array name="restock_type"><!--进货汇总类别-->
+        <item>按仓库汇总</item><!--1-->
+        <item>按配件类别汇总</item><!--2-->
+        <item>按供应商汇总</item><!--3-->
+    </string-array>
+
+    <string-array name="report_jingYing"><!--报表经营-标题 -->
+        <item>本期营业总额</item>
+        <item>-其中销售总额</item>
+        <item>----减：销售退回总额</item>
+        <item>----加：维修业务总额</item>
+        <item>----加：索赔业务总额</item>
+        <item>----加：理赔业务总额</item>
+        <item>本期成本总额</item>
+        <item>-其中销售成本</item>
+        <item>----减：销售退回成本</item>
+        <item>----维修业务成本</item>
+        <item>----索赔业务成本</item>
+        <item>----理赔业务成本</item>
+        <item>减：本期免收损失（优惠、应收免收）</item>
+        <item>本期盘点盘盈盘亏净额</item>
+        <item>本期毛利润</item>
+        <item>减：本期费用合计</item>
+        <item>本期纯利润</item>
+        <item>本期应付款总额</item>
+        <item>本期实付款总额</item>
+        <item>本期应收款总额</item>
+        <item>本期实收款总额</item>
+    </string-array>
+    <string-array name="report_kuCun">
+        <item>本期入库总额</item>
+        <item>-其中进货入库</item>
+        <item>----内部调拨入库</item>
+        <item>----采购退货入库</item>
+        <item>----盘点盘盈入库</item>
+        <item>----其他入库</item>
+        <item>----调价入库</item>
+        <item>本期出库总额</item>
+        <item>-其中销售出库</item>
+        <item>----内部调拨出库</item>
+        <item>----销售退回出库</item>
+        <item>----领料出库</item>
+        <item>----盘点盘亏出库</item>
+        <item>----其他出库</item>
+        <item>期末库存余额</item>
+    </string-array>
+
+    <string-array name="report_weiXiu">
+        <item>接待车辆台次</item>
+        <item>-其中已结算台次</item>
+        <item>----未结算台次</item>
+        <item>结算总金额</item>
+        <item>-其中工时费金额</item>
+        <item>----材料费金额</item>
+        <item>----其他费金额</item>
+        <item>----管理费金额</item>
+        <item>优惠金额</item>
+        <item>应收款金额</item>
+        <item>实收款金额</item>
+        <item>欠款金额</item>
+        <item>维修成本金额</item>
+        <item>维修毛利润</item>
+    </string-array>
+</resources>

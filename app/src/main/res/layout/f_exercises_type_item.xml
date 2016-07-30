@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="@dimen/exercises_type_item_height">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/exercises_type_item_height"
+        android:orientation="horizontal"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            >
+           <TextView
+               android:id="@+id/exe_type_item_icon1"
+               android:layout_width="@dimen/bottom_bar_btn_icon_car_size"
+               android:layout_height="@dimen/bottom_bar_btn_icon_car_size"
+               android:background="@drawable/list_icon_2"
+               />
+            <TextView
+                android:id="@+id/exe_type_item_title1"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="5dp"
+
+                />
+
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/exe_line"
+            >
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            >
+            <TextView
+                android:id="@+id/exe_type_item_icon2"
+                android:layout_width="@dimen/bottom_bar_btn_icon_car_size"
+                android:layout_height="@dimen/bottom_bar_btn_icon_car_size"
+                android:background="@drawable/list_icon_2"
+                />
+            <TextView
+                android:id="@+id/exe_type_item_title2"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="5dp"
+
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
