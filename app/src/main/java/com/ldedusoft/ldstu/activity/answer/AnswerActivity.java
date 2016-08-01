@@ -79,11 +79,13 @@ public class AnswerActivity extends BaseActivity{
         param = intent.getStringExtra("param"); //模式
         title = intent.getStringExtra("title"); //标题
         category = intent.getStringExtra("category"); //分类
+        if (TextUtils.isEmpty(category)){
+            category = EXE_TYPE_NORMAL;
+        }
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         initView();
         if(EXE_TYPE_NORMAL.equals(param)) { //普通模式
             model = EXE_TYPE_NORMAL;
-            favLayout.setVisibility(View.VISIBLE);
             getNormalExeData(category);
         }else if(EXE_TYPE_WRONG.equals(param)){//错题模式
             model = EXE_TYPE_WRONG;
@@ -140,6 +142,7 @@ public class AnswerActivity extends BaseActivity{
         favText = (TextView)findViewById(R.id.answer_fav_txt);
         noExeLayout = (LinearLayout)findViewById(R.id.answer_no_exe);
         titlLayout = (LinearLayout)findViewById(R.id.answer_title_layout);
+
         //收藏
         favIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,6 +181,66 @@ public class AnswerActivity extends BaseActivity{
             @Override
             public void onClick(View v) {
                 doNextExe();
+            }
+        });
+        radioA.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetector.onTouchEvent(event);
+            }
+        });
+        radioB.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetector.onTouchEvent(event);
+            }
+        });
+        radioC.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetector.onTouchEvent(event);
+            }
+        });
+        radioD.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetector.onTouchEvent(event);
+            }
+        });
+        checkA.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetector.onTouchEvent(event);
+            }
+        });
+        checkB.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetector.onTouchEvent(event);
+            }
+        });
+        checkC.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetector.onTouchEvent(event);
+            }
+        });
+        checkD.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetector.onTouchEvent(event);
+            }
+        });
+        radioSubmit.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetector.onTouchEvent(event);
+            }
+        });
+        checkSubmit.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gestureDetector.onTouchEvent(event);
             }
         });
 //        单选提交按钮
@@ -297,6 +360,7 @@ public class AnswerActivity extends BaseActivity{
         delLayout.setVisibility(View.GONE);
         favLayout.setVisibility(View.GONE);
         noExeLayout.setVisibility(View.VISIBLE);
+        bottomBar.setVisibility(View.INVISIBLE);
     }
 
     /**
@@ -515,10 +579,12 @@ public class AnswerActivity extends BaseActivity{
                             //测试模式
                             Toast.makeText(AnswerActivity.this, "测试模式模拟数据", Toast.LENGTH_SHORT).show();
                             exeModel = InterfaceResault.getExercises(pageNumber, category);
+                            favLayout.setVisibility(View.VISIBLE);
                             initData();
                         } else {
                             //成功方法
                             exeModel = InterfaceResault.getExercises(pageNumber, category);
+                            favLayout.setVisibility(View.VISIBLE);
                             initData();
                         }
 
@@ -581,6 +647,7 @@ public class AnswerActivity extends BaseActivity{
             showNoExe();
             return;
         }
+        bottomBar.setVisibility(View.VISIBLE);
         answer_content.setText(exeModel.content);
         if("单选题".equals(exeModel.type)){
             radioGroup.clearCheck();
