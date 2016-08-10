@@ -8,13 +8,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
-
 </com.ldedusoft.ldstu.component.customComp.TopBar>
     <!--题目-->
     <LinearLayout
         android:id="@+id/answer_title_layout"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:minHeight="80dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="top"
         >
@@ -29,7 +29,7 @@
              android:id="@+id/answer_content"
             android:textSize="18sp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:gravity="top|left"
             android:paddingLeft="5dp"
             android:paddingTop="20dp"
@@ -44,7 +44,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:visibility="gone"
-        android:layout_marginLeft="40dp"
+        android:layout_marginLeft="@dimen/answer_item_padding_left"
         >
         <RadioGroup
             android:id="@+id/answer_radio_group"
@@ -56,28 +56,32 @@
                 android:id="@+id/answer_radio_A"
                 android:textSize="@dimen/answer_item_text_size"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/answer_item_height" />
+                android:layout_height="@dimen/answer_item_height"
+                android:paddingRight="20dp" />
             <RadioButton
                 android:id="@+id/answer_radio_B"
                 style="@style/RadioButtonStylesB"
                 android:textColor="@color/answer_item_text_color"
                 android:textSize="@dimen/answer_item_text_size"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/answer_item_height" />
+                android:layout_height="@dimen/answer_item_height"
+                android:paddingRight="20dp" />
             <RadioButton
                 android:id="@+id/answer_radio_C"
                 style="@style/RadioButtonStylesC"
                 android:textColor="@color/answer_item_text_color"
                 android:textSize="@dimen/answer_item_text_size"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/answer_item_height" />
+                android:layout_height="@dimen/answer_item_height"
+                android:paddingRight="20dp" />
             <RadioButton
                 android:id="@+id/answer_radio_D"
                 style="@style/RadioButtonStylesD"
                 android:textColor="@color/answer_item_text_color"
                 android:textSize="@dimen/answer_item_text_size"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/answer_item_height" />
+                android:layout_height="@dimen/answer_item_height"
+                android:paddingRight="20dp" />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/answer_item_height"
@@ -105,7 +109,7 @@
         android:layout_weight="1"
         android:orientation="vertical"
         android:visibility="gone"
-        android:paddingLeft="40dp"
+        android:paddingLeft="@dimen/answer_item_padding_left"
         >
         <CheckBox
             android:id="@+id/answer_checkbox_A"
@@ -113,28 +117,33 @@
             android:textColor="@color/answer_item_text_color"
             android:textSize="@dimen/answer_item_text_size"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/answer_item_height" />
+            android:layout_height="@dimen/answer_item_height"
+            android:paddingRight="20dp"
+            />
         <CheckBox
             android:id="@+id/answer_checkbox_B"
             style="@style/CheckBoxStyleB"
             android:textColor="@color/answer_item_text_color"
             android:textSize="@dimen/answer_item_text_size"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/answer_item_height" />
+            android:layout_height="@dimen/answer_item_height"
+            android:paddingRight="20dp" />
         <CheckBox
             android:id="@+id/answer_checkbox_C"
             style="@style/CheckBoxStyleC"
             android:textColor="@color/answer_item_text_color"
             android:textSize="@dimen/answer_item_text_size"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/answer_item_height" />
+            android:layout_height="@dimen/answer_item_height"
+            android:paddingRight="20dp" />
         <CheckBox
             android:id="@+id/answer_checkbox_D"
             style="@style/CheckBoxStyleD"
             android:textColor="@color/answer_item_text_color"
             android:textSize="@dimen/answer_item_text_size"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/answer_item_height" />
+            android:layout_height="@dimen/answer_item_height"
+            android:paddingRight="20dp" />
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="@dimen/answer_item_height"
@@ -159,7 +168,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:paddingLeft="40dp"
+        android:paddingLeft="@dimen/answer_item_padding_left"
         android:gravity="center_vertical"
         android:visibility="gone"
         >
@@ -186,7 +195,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:paddingLeft="40dp"
+        android:paddingLeft="@dimen/answer_item_padding_left"
         android:gravity="center_vertical"
         android:visibility="gone"
         >
@@ -207,7 +216,6 @@
             android:gravity="center_vertical"
             />
     </LinearLayout>
-
     <!--没有试题-->
     <LinearLayout
         android:id="@+id/answer_no_exe"
@@ -224,7 +232,6 @@
             android:layout_height="wrap_content" />
 
     </LinearLayout>
-
     <!--分割线-->
     <RelativeLayout
         android:layout_width="match_parent"

@@ -15,8 +15,8 @@ import com.ldedusoft.ldstu.interfaces.FormToolBarListener;
  */
 public class TopBar extends LinearLayout {
     private TextView back;
-    private TextView backText;
-    private LinearLayout backLayout;
+    private TextView backText,saveText;
+    private LinearLayout backLayout,saveLayout;
     private TextView topBarTitle;
     private FormToolBarListener formToolBarListener;
     public TopBar(Context context, AttributeSet attrs){
@@ -25,8 +25,10 @@ public class TopBar extends LinearLayout {
         LayoutInflater.from(context).inflate(R.layout.ldstu_top_bar, this);
          topBarTitle = (TextView)findViewById(R.id.top_bar_title);
         backLayout = (LinearLayout)findViewById(R.id.form_tool_bar_back_layout);
+        saveLayout = (LinearLayout)findViewById(R.id.form_tool_bar_saveLayout);
         back  = (TextView)findViewById(R.id.form_tool_bar_back);
         backText = (TextView)findViewById(R.id.form_tool_bar_text);
+        saveText =  (TextView)findViewById(R.id.form_tool_bar_save);
         back.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,12 +55,23 @@ public class TopBar extends LinearLayout {
                 }
             }
         });
+        saveText.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(formToolBarListener!=null){
+                    formToolBarListener.OnSaveClick();
+                }
+            }
+        });
     }
 
     public void setFormToolBarListener(FormToolBarListener formToolBarListener) {
         this.formToolBarListener = formToolBarListener;
     }
 
+    public void showSaveBtn(){
+        saveLayout.setVisibility(VISIBLE);
+    }
     public void showBackBtn(){
         backLayout.setVisibility(VISIBLE);
     }

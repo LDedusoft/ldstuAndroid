@@ -1,7 +1,6 @@
 package com.ldedusoft.ldstu.adapters;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,7 @@ import java.util.List;
  */
 public class ExaQueryAdapter extends ArrayAdapter<ExaQuery> {
     private int resourceId;
-    private TextView exaName,exaTime,exaType,exaScore;
+    private TextView raceName,sjName,exaTime,exaScore,exaZScore;
     private LinearLayout exaTypeLayout;
     private Context mContext;
     private ExaQuery item;
@@ -40,18 +39,17 @@ public class ExaQueryAdapter extends ArrayAdapter<ExaQuery> {
             view = convertView;
         }
         if(item!=null){
-            exaName = (TextView)view.findViewById(R.id.exa_query_name);
+            raceName = (TextView)view.findViewById(R.id.exa_query_name);
+            sjName = (TextView)view.findViewById(R.id.exa_query_sjMingCheng);
             exaTime = (TextView)view.findViewById(R.id.exa_query_time);
-            exaType = (TextView)view.findViewById(R.id.exa_query_type);
             exaScore = (TextView)view.findViewById(R.id.exa_query_score);
+            exaZScore = (TextView)view.findViewById(R.id.exa_query_Zscore);
             exaTypeLayout = (LinearLayout)view.findViewById(R.id.exa_type_layout);
-            if(TextUtils.isEmpty(item.type)){
-                exaTypeLayout.setVisibility(View.INVISIBLE);
-            }
-            exaName.setText(item.name);
-            exaTime.setText(item.time);
-            exaType.setText(item.type);
-            exaScore.setText(item.score);
+            raceName.setText(item.raceName);
+            sjName.setText(item.sjName);
+            exaTime.setText(item.exaTime);
+            exaScore.setText(item.exaScore);
+            exaZScore.setText(item.exaZScore);
         }
         return view;
     }

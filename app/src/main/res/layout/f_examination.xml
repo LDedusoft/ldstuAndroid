@@ -39,7 +39,7 @@
                 android:layout_weight="1"
                 >
                 <TextView
-                    android:text="考试名称"
+                    android:text="比赛名称"
                     android:textSize="@dimen/commonQuery_condition_textsize"
                     android:textColor="@color/inputListItemText"
                     android:layout_width="0dp"
@@ -48,7 +48,7 @@
                     android:layout_weight="1"
                     android:paddingLeft="10dp"
                     />
-                <EditText
+                <TextView
                     android:id="@+id/kaoshi_mingcheng"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -57,6 +57,7 @@
                     android:textColor="@color/commonQueryConditionText"
                     android:textColorHint="@color/inputListItemHint"
                     android:gravity="center_vertical|left"
+                    android:hint="请选择比赛"
                     />
             </LinearLayout>
             <LinearLayout
@@ -65,7 +66,7 @@
                 android:layout_weight="1"
                 >
                 <TextView
-                    android:text="考试时间"
+                    android:text="考生姓名"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:textSize="@dimen/commonQuery_condition_textsize"
@@ -74,7 +75,18 @@
                     android:layout_weight="1"
                     />
                 <TextView
-                    android:id="@+id/kaoshi_shijian"
+                    android:id="@+id/kaoshi_username"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/commonQuery_condition_textsize"
+                    android:textColor="@color/commonQueryConditionText"
+                    android:textColorHint="@color/inputListItemHint"
+                    android:gravity="center_vertical|left"
+                    android:visibility="gone"
+                    />
+                <TextView
+                    android:id="@+id/kaoshi_realName"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="match_parent"
@@ -85,53 +97,7 @@
                     />
             </LinearLayout>
         </LinearLayout>
-            <!--第二行-->
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/commonQuery_condition_height">
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    >
-                    <TextView
-                        android:text="考试类型"
-                        android:textSize="@dimen/commonQuery_condition_textsize"
-                        android:textColor="@color/inputListItemText"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical|left"
-                        android:layout_weight="1"
-                        android:paddingLeft="10dp"
-                        />
-                    <RadioGroup
-                        android:id="@+id/kaoshi_radiogroup"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3"
-                        android:orientation="horizontal"
-                        >
-                        <RadioButton
-                            android:id="@+id/kaoshi_radio_lilun"
-                            android:text="理论题考试"
-                            android:textColor="@color/inputListItemText"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            />
-                        <RadioButton
-                            android:id="@+id/kaoshi_radio_caozuo"
-                            android:text="操作题考试"
-                            android:textColor="@color/inputListItemText"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            />
-                    </RadioGroup>
 
-                </LinearLayout>
-            </LinearLayout>
         </LinearLayout>
         <!--右侧查询-->
         <LinearLayout

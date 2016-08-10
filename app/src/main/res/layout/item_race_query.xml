@@ -34,13 +34,13 @@
                     android:gravity="center_vertical"
                     android:layout_weight="1"/>
                 <TextView
-                    android:text="开考时间:"
+                    android:text="编号:"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:gravity="center"/>
                 <TextView
-                    android:id="@+id/race_query_time"
+                    android:id="@+id/race_query_rounds"
                     android:layout_width="0dp"
                     android:textColor="@color/answer_item_text_color"
                     android:layout_height="match_parent"
@@ -56,10 +56,10 @@
                 android:orientation="horizontal"
                 >
                 <TextView
-                    android:text="比赛成绩:"
+                    android:text="总分:"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:gravity="center_vertical"/>
                 <TextView
                     android:id="@+id/race_query_score"
@@ -67,15 +67,22 @@
                     android:textColor="@color/answer_item_text_color"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:layout_weight="1"/>
+                    android:layout_weight="2"/>
                 <TextView
-                    android:text="比赛类型:"
+                    android:text="限时:"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"/>
+                    android:layout_weight="2"
+                    android:gravity="center"/>
                 <TextView
-                    android:id="@+id/race_query_type"
+                    android:id="@+id/race_query_xianshi"
+                    android:layout_width="0dp"
+                    android:textColor="@color/answer_item_text_color"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:text="(分钟)"
                     android:layout_width="0dp"
                     android:textColor="@color/answer_item_text_color"
                     android:layout_height="match_parent"
@@ -90,33 +97,28 @@
                 android:orientation="horizontal"
                 >
                 <TextView
-                    android:text="比赛轮数:"
+                    android:text="开始时间:"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"/>
+                    android:gravity="center_vertical"
+                    android:layout_weight="1"/>
                 <TextView
-                    android:id="@+id/race_query_rounds"
+                    android:id="@+id/race_query_time"
                     android:layout_width="0dp"
                     android:textColor="@color/answer_item_text_color"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:layout_weight="1"/>
-                <!--比赛类型，根据数据显示-->
-                <LinearLayout
-                    android:id="@+id/race_type_layout"
-                    android:layout_weight="2"
-                    android:layout_width="0dp"
-                    android:orientation="horizontal"
-                    android:layout_height="match_parent">
-                    
-                </LinearLayout>
+                    android:layout_weight="3"/>
+
+
             </LinearLayout>
             
         </LinearLayout>
         <LinearLayout
             android:layout_width="70dp"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            >
             <TextView
                 android:id="@+id/race_query_details"
                 android:text="详情>"

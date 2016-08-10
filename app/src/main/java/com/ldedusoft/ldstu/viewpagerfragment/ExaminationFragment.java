@@ -1,20 +1,17 @@
 package com.ldedusoft.ldstu.viewpagerfragment;
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,9 +28,7 @@ import com.ldedusoft.ldstu.util.interfacekits.InterfaceResault;
 
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * @ClassName: TabCFm
@@ -43,11 +38,8 @@ import java.util.Calendar;
  *
  */
 public class ExaminationFragment extends Fragment {
-	private EditText nameEdit;
-	private TextView timeText;
-	private RadioGroup radioGroup;
-	private RadioButton lilunRadio;
-	private RadioButton caozuoRadio;
+	private TextView nameEdit;
+	private TextView userName,realName;
 	private TextView submitBtn;
 	private ListView listView;
 	private ExaQueryAdapter adapter;
@@ -77,11 +69,13 @@ public class ExaminationFragment extends Fragment {
 		initListView(view);
 	}
 
+	public void setUserRealName(){
+		realName.setText(UserProperty.getInstance().getRealName());
+	}
 
-
-	private void getData(final String param){
+	private void getData(final String raceName,final String userName){
 		String serverPath = InterfaceParam.SERVER_PATH;
-		String paramXml = InterfaceParam.getInstance().getExaQuery(UserProperty.getInstance().getUserName());
+		String paramXml = InterfaceParam.getInstance().getExaQuery(raceName,userName);
 		HttpUtil.sendHttpRequest(serverPath, paramXml, new HttpCallbackListener() {
 			@Override
 			public void onFinish(final String response) {
@@ -91,14 +85,10 @@ public class ExaminationFragment extends Fragment {
 						String result = ParseXML.getItemValueWidthName(response, InterfaceResault.exaQueryResult);
 						if (TextUtils.isEmpty(result)) {
 							//失败方法
-//                            Toast.makeText(AnswerActivity.this, "获取数据失败", Toast.LENGTH_SHORT).show();
-							//测试模式
-							Toast.makeText(getActivity(), "测试模式模拟数据", Toast.LENGTH_SHORT).show();
-							dataList = InterfaceResault.getExaQuery(dataList, param);
-							adapter.notifyDataSetChanged();
+							Toast.makeText(getActivity(), "获取数据失败", Toast.LENGTH_SHORT).show();
 						} else {
 							//成功方法
-							dataList = InterfaceResault.getExaQuery(dataList, param);
+							dataList = InterfaceResault.getExaQuery(dataList, result);
 							adapter.notifyDataSetChanged();
 						}
 
@@ -108,10 +98,12 @@ public class ExaminationFragment extends Fragment {
 
 			@Override
 			public void onWarning(String warning) {
+				Log.i("网络请求异常", warning);
 			}
 
 			@Override
 			public void onError(Exception e) {
+				Log.i("网络请求错误", e.getMessage());
 			}
 		});
 
@@ -128,68 +120,79 @@ public class ExaminationFragment extends Fragment {
 	}
 
 	private void initView(View view){
-		  nameEdit = (EditText)view.findViewById(R.id.kaoshi_mingcheng);
-		  timeText= (TextView)view.findViewById(R.id.kaoshi_shijian);
-		  radioGroup= (RadioGroup)view.findViewById(R.id.kaoshi_radiogroup);
-		  lilunRadio= (RadioButton)view.findViewById(R.id.kaoshi_radio_lilun);
-		  caozuoRadio= (RadioButton)view.findViewById(R.id.kaoshi_radio_caozuo);
+		  nameEdit = (TextView)view.findViewById(R.id.kaoshi_mingcheng);
+		  userName= (TextView)view.findViewById(R.id.kaoshi_username);
+		realName =(TextView)view.findViewById(R.id.kaoshi_realName);
 		  submitBtn= (TextView)view.findViewById(R.id.kaoshi_submit);
-		topBar = (TopBar)view.findViewById(R.id.exa_top_bar);
+		topBar = (TopBar) view.findViewById(R.id.exa_top_bar);
 		topBar.setTitle("考试查询");
+		userName.setText(UserProperty.getInstance().getUserName());
+//		realName.setText(UserProperty.getInstance().getRealName()); 初始化时没有数据，fragment切换时设置数据
+		nameEdit.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent("activity.RaceSelectActivity");
+				intent.putExtra("needBack","true");
+				getActivity().startActivityForResult(intent,1);
+			}
+		});
 
-		//初始化当前时间
-		SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		String date = sDateFormat.format(new java.util.Date());
-		timeText.setText(date);
-
-		lilunRadio.setChecked(true);
-		lilunRadio.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				nameEdit.clearFocus();
-				hiddenKB(v);
-			}
-		});
-		caozuoRadio.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				nameEdit.clearFocus();
-				hiddenKB(v);
-			}
-		});
-		timeText.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				nameEdit.clearFocus();
-				hiddenKB(v);
-				Calendar c = Calendar.getInstance();
-				new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
-					@Override
-					public void onDateSet(DatePicker dp, int year, int mounth, int day) {
-						timeText.setText(year + "-" + (mounth + 1) + "-" + day);
-					}
-				},
-						c.get(Calendar.YEAR),
-						c.get(Calendar.MONTH),
-						c.get(Calendar.DAY_OF_MONTH)).show();
-			}
-		});
+//		//初始化当前时间
+//		SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//		String date = sDateFormat.format(new java.util.Date());
+//		timeText.setText(date);
+//
+//		lilunRadio.setChecked(true);
+//		lilunRadio.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				nameEdit.clearFocus();
+//				hiddenKB(v);
+//			}
+//		});
+//		caozuoRadio.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				nameEdit.clearFocus();
+//				hiddenKB(v);
+//			}
+//		});
+//		timeText.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				nameEdit.clearFocus();
+//				hiddenKB(v);
+//				Calendar c = Calendar.getInstance();
+//				new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+//					@Override
+//					public void onDateSet(DatePicker dp, int year, int mounth, int day) {
+//						timeText.setText(year + "-" + (mounth + 1) + "-" + day);
+//					}
+//				},
+//						c.get(Calendar.YEAR),
+//						c.get(Calendar.MONTH),
+//						c.get(Calendar.DAY_OF_MONTH)).show();
+//			}
+//		});
 		submitBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				try {
 					hiddenKB(v);
-					String paramStr = "";
 					JSONObject jsonObject = new JSONObject();
-					jsonObject.put("name", nameEdit.getText());
-					jsonObject.put("time",timeText.getText());
-					if(lilunRadio.isChecked()){
-						jsonObject.put("type","liLun");
-					}else if(caozuoRadio.isChecked()){
-						jsonObject.put("type","caoZuo");
+					if(TextUtils.isEmpty(nameEdit.getText())){
+						Toast.makeText(getActivity(),"请选择比赛名称",Toast.LENGTH_SHORT).show();
+						return;
 					}
-					paramStr = jsonObject.toString();
-					getData(paramStr);
+					jsonObject.put("raceName", nameEdit.getText());
+					jsonObject.put("userName", userName.getText());
+//					jsonObject.put("time",timeText.getText());
+//					if(lilunRadio.isChecked()){
+//						jsonObject.put("type","liLun");
+//					}else if(caozuoRadio.isChecked()){
+//						jsonObject.put("type","caoZuo");
+//					}
+					getData(jsonObject.getString("raceName"),jsonObject.getString("userName"));
 				}catch (Exception e){e.printStackTrace();}
 			}
 		});

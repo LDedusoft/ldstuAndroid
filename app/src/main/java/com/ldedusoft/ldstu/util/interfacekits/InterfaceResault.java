@@ -16,21 +16,25 @@ import java.util.ArrayList;
  */
 public class InterfaceResault {
 
-    public static String PU_UserInfoResult = "aaa";
-    public static String userInfoResult = "bbb";
-    public static String exeResult = "bbb";
-    public static String exaQueryResult = "bbb";
-    public static String raceQueryResult = "bbb";
+    public static String PU_UserInfoResult = "LoginResult";
+    public static String userInfoResult = "UserInfoResult";
+    public static String exeResult = "GetSubjectResult";
+    public static String exaQueryResult = "ScoreInfoResult";
+    public static String raceQueryResult = "TestListResult";
+    public static String schoolQueryResult = "SchoolListResult";
+    public static String ModifyUserInfoResult = "ModifyUserInfoResult";
+    public static String CourseListResult = "CourseListResult";
 
     /**
      * 用户信息
      * @return
      */
-    public static JSONObject getUserInfo(){
+    public static JSONObject getUserInfo(String userInfoStr){
         JSONObject json = new JSONObject();
         try {
-            String userInfoStr = "{\"user\":\"wangjianwei\",\"name\":\"wangjianwei\",\"bianhao\":\"286\",\"xuexiao\":\"奇峰汽车学院\",\"banji\":\"15级1班\",\"xingbie\":\"男\",\"nianling\":\"\"}";
-             json = new JSONObject(userInfoStr);
+//            {"UserName":"用户名","KSPWD":"密码","StudentName":"姓名","StudentSex":"性别","SchoolName":"学校","HeadImage":"头像"}
+            JSONArray ja = new JSONArray(userInfoStr);
+            json =ja.getJSONObject(0);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -39,6 +43,44 @@ public class InterfaceResault {
 
     /**
      * 获取试题
+     * @param result{"Content":"题目内容","Option1":"选项1","Option1":"选项2","Option1":"选项3","Option1":"选项4","Result":"答案"}
+     * @return
+     */
+    public static ExeModel getExercises(String result){
+        if(TextUtils.isEmpty(result)){
+            return null;
+        }
+        ExeModel  exeModel = new ExeModel();
+        try {
+            JSONArray jsArray = new JSONArray(result);
+            JSONObject json = new JSONObject();
+            json = jsArray.getJSONObject(0);
+            exeModel.id =Integer.parseInt(json.getString("ID"));
+            exeModel.type =json.getString("TypeName").trim();
+//          exeModel.category =json.getString("category");
+            exeModel.content =json.getString("Content");
+            exeModel.optionA =json.getString("Option1");
+            exeModel.optionB =json.getString("Option2");
+            exeModel.optionC =json.getString("Option3");
+            exeModel.optionD =json.getString("Option4");
+            if(exeModel.type.equals("是非题")){
+                exeModel.optionA = "是";
+                exeModel.optionB = "否";
+            }
+            String answer = json.getString("Result");
+            answer =answer.replace("1","A").replace("2","B").replace("3","C").replace("4","D").replaceAll(",","");
+            if(exeModel.type.equals("是非题")){
+                answer = answer.replace("A","是").replace("B","否");
+            }
+            exeModel.answer =answer;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return exeModel;
+    }
+
+    /**
+     * 获取试题(模拟数据)
      * @param id 页码
      *  @param category 分类:单选，多选，是非，汽车知识，礼仪知识。。。。
      * @return
@@ -158,40 +200,70 @@ public class InterfaceResault {
 
     /**
      * 知识分类
+     * {"CourseName":"名称"}
      */
-    public static String[] getExeCategory(){
-        String str = "汽车文化,汽车保险,汽车销售,汽车信贷,汽车后市场,汽车配件,汽车营销考核,汽车商务,汽修管理";
-        String[] cateArray = str.split(",");
-        return  cateArray;
+    public static String[] getExeCategory(String result){
+
+        try {
+            //{"CourseName":"名称"}
+            JSONArray jsonArray = new JSONArray(result);
+            String[] resArray = new String[jsonArray.length()];
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject obj = jsonArray.getJSONObject(i);
+                resArray[i] = obj.getString("CourseName");
+            }
+            return  resArray;
+        }catch (Exception e){e.printStackTrace();}
+      return null;
     }
 
-    public static ArrayList<RaceQuery> getRaceQuery(ArrayList listData,String param){
+    /*获取比赛列表*/
+    public static ArrayList<RaceQuery> getRaceQuery(ArrayList listData,String result){
         //从服务器获取查询值参数为param
         listData.clear();
-        String dataStr = getDataFromService("raceQuery",param);
-        if(TextUtils.isEmpty(dataStr)){
+        if(TextUtils.isEmpty(result)){
             return null;
         }
         try {
-            JSONArray jsonArray = new JSONArray(dataStr);
+            //{"Name":"名称","TestId":"编号","Qzfen:"总分","StartTime":"开始时间","LimitTime":"限时"}
+            JSONArray jsonArray = new JSONArray(result);
             for(int i=0;i<jsonArray.length();i++){
                 JSONObject obj = jsonArray.getJSONObject(i);
                 RaceQuery eq = new RaceQuery();
-                eq.name = obj.getString("name");
-                eq.time = obj.getString("time");
-                eq.type = obj.getString("type");
-                eq.score = obj.getString("score");
-                eq.rounds = obj.getString("rounds");
+                eq.Name = obj.getString("Name");
+                eq.StartTime = obj.getString("StartTime");
+                eq.LimitTime = obj.getString("LimitTime");
+                eq.Qzfen = obj.getString("Qzfen");
+                eq.TestId = obj.getString("TestId");
                 listData.add(eq);
             }
         }catch (Exception e){e.printStackTrace();}
         return listData;
     }
 
-    public static ArrayList<ExaQuery> getExaQuery(ArrayList listData,String param){
+    /*获取学校列表*/
+    public static ArrayList<String> getSchoolQuery(ArrayList listData,String result){
         //从服务器获取查询值参数为param
         listData.clear();
-        String dataStr = getDataFromService("exaQuery",param);
+        if(TextUtils.isEmpty(result)){
+            return null;
+        }
+        try {
+            //{"SchoolName":"名称"}
+            JSONArray jsonArray = new JSONArray(result);
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject obj = jsonArray.getJSONObject(i);
+                String schoolName = obj.getString("SchoolName");
+                listData.add(schoolName);
+            }
+        }catch (Exception e){e.printStackTrace();}
+        return listData;
+    }
+
+    //分数查询
+    //{"TestName":"比赛名称","SJName":"试卷名称","Total:"总分","Score":"得分","YongShi":"用时"}
+    public static ArrayList<ExaQuery> getExaQuery(ArrayList listData,String dataStr){
+        listData.clear();
         if(TextUtils.isEmpty(dataStr)){
             return null;
         }
@@ -200,14 +272,11 @@ public class InterfaceResault {
             for(int i=0;i<jsonArray.length();i++){
                 JSONObject obj = jsonArray.getJSONObject(i);
                 ExaQuery eq = new ExaQuery();
-                eq.name = obj.getString("name");
-                eq.time = obj.getString("time");
-                if(obj.has("type")) {
-                    eq.type = obj.getString("type");
-                }else {
-                    eq.type = "";
-                }
-                eq.score = obj.getString("score");
+                eq.raceName = obj.getString("TestName");
+                eq.sjName = obj.getString("SJName");
+                eq.exaScore = obj.getString("Score");
+                eq.exaZScore = obj.getString("Total");
+                eq.exaTime = obj.getString("YongShi");
                 listData.add(eq);
             }
         }catch (Exception e){e.printStackTrace();}

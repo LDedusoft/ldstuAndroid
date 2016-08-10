@@ -11,6 +11,16 @@ public class UserProperty {
 
     private String passWord;
 
+    private String realName;
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
     private int userType;
 
     /*私有构造函数*/

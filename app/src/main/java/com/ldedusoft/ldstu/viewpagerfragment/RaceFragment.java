@@ -3,6 +3,7 @@ package com.ldedusoft.ldstu.viewpagerfragment;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -10,15 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ldedusoft.ldstu.R;
 import com.ldedusoft.ldstu.adapters.RaceQueryAdapter;
 import com.ldedusoft.ldstu.component.customComp.TopBar;
+import com.ldedusoft.ldstu.interfaces.FormToolBarListener;
 import com.ldedusoft.ldstu.model.RaceQuery;
 import com.ldedusoft.ldstu.model.UserProperty;
 import com.ldedusoft.ldstu.util.HttpCallbackListener;
@@ -41,13 +42,14 @@ import java.util.Calendar;
  *
  */
 public class RaceFragment extends Fragment {
-	private EditText nameEdit;
+//	private EditText nameEdit;
 	private TextView timeText;
 	private TextView submitBtn;
 	private ArrayList<RaceQuery> dataList;
 	private ListView listView;
 	private RaceQueryAdapter adapter;
 	private TopBar topBar;
+	private String needBack = "false";
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -67,9 +69,12 @@ public class RaceFragment extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		Intent intent = getActivity().getIntent();
+		needBack = intent.getStringExtra("needBack");
 		View view = getView();
 		initView(view);
 		initListView(view);
+//		getData("");
 	}
 
 	private void initListView(View view){
@@ -77,14 +82,44 @@ public class RaceFragment extends Fragment {
 		dataList = new ArrayList<RaceQuery>();
 		adapter = new RaceQueryAdapter(getActivity(),R.layout.item_race_query,dataList);
 		listView.setAdapter(adapter);
+		if("true".equals(needBack)) {
+			listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+					RaceQuery rq = dataList.get(position);
+					//返回数据到上一个活动
+					Intent intent = new Intent();
+					Bundle bundle = new Bundle();
+					bundle.putSerializable("item", rq);
+					intent.putExtras(bundle);
+					getActivity().setResult(getActivity().RESULT_OK, intent);
+					getActivity().finish();
+				}
+			});
+			getData(""); //查询时需要初始化数据
+		}
 	}
 
 	private void initView(View view){
-		nameEdit = (EditText)view.findViewById(R.id.race_mingcheng);
+//		nameEdit = (EditText)view.findViewById(R.id.race_mingcheng);
 		timeText = (TextView)view.findViewById(R.id.race_shijian);
 		submitBtn = (TextView)view.findViewById(R.id.race_submit);
 		topBar = (TopBar)view.findViewById(R.id.race_top_bar);
-		topBar.setTitle("比赛查询");
+		topBar.setTitle("我的比赛");
+		if("true".equals(needBack)){
+			topBar.showBackBtn();
+		}
+		topBar.setFormToolBarListener(new FormToolBarListener() {
+			@Override
+			public void OnSaveClick() {
+
+			}
+
+			@Override
+			public void OnBackClick() {
+				getActivity().finish();
+			}
+		});
 		//初始化当前时间
 		SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		String date = sDateFormat.format(new java.util.Date());
@@ -93,7 +128,7 @@ public class RaceFragment extends Fragment {
 		timeText.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				nameEdit.clearFocus();
+//				nameEdit.clearFocus();
 				hiddenKB(v);
 				Calendar c = Calendar.getInstance();
 				new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
@@ -114,10 +149,11 @@ public class RaceFragment extends Fragment {
 					hiddenKB(v);
 					String paramStr = "";
 					JSONObject jsonObject = new JSONObject();
-					jsonObject.put("name", nameEdit.getText());
+//					jsonObject.put("name", nameEdit.getText());
 					jsonObject.put("time", timeText.getText());
 					paramStr = jsonObject.toString();
-					getData(paramStr);
+//					getData(timeText.getText().toString());
+					getData("");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -125,9 +161,12 @@ public class RaceFragment extends Fragment {
 		});
 	}
 
-	private void getData(final String param){
+	public void getData(final String time){
+		if(dataList.size()>0){
+			return;
+		}
 		String serverPath = InterfaceParam.SERVER_PATH;
-		String paramXml = InterfaceParam.getInstance().getRaceQuery(UserProperty.getInstance().getUserName());
+		String paramXml = InterfaceParam.getInstance().getRaceQuery(time, UserProperty.getInstance().getUserName());
 		HttpUtil.sendHttpRequest(serverPath, paramXml, new HttpCallbackListener() {
 			@Override
 			public void onFinish(final String response) {
@@ -138,13 +177,9 @@ public class RaceFragment extends Fragment {
 						if (TextUtils.isEmpty(result)) {
 							//失败方法
 //                            Toast.makeText(AnswerActivity.this, "获取数据失败", Toast.LENGTH_SHORT).show();
-							//测试模式
-							Toast.makeText(getActivity(), "测试模式模拟数据", Toast.LENGTH_SHORT).show();
-							dataList = InterfaceResault.getRaceQuery(dataList, param);
-							adapter.notifyDataSetChanged();
 						} else {
 							//成功方法
-							dataList = InterfaceResault.getRaceQuery(dataList, param);
+							dataList = InterfaceResault.getRaceQuery(dataList, result);
 							adapter.notifyDataSetChanged();
 						}
 

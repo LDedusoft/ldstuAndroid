@@ -1,5 +1,7 @@
 package com.ldedusoft.ldstu.util;
 
+import android.util.Log;
+
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -14,6 +16,7 @@ public class HttpUtil {
             @Override
             public void run() {
                 try {
+                    Log.i("提交接口参数：", xml);
                     byte[] entity = xml.getBytes("UTF-8");
                     HttpURLConnection conn = (HttpURLConnection) new URL(path).openConnection();
                     conn.setConnectTimeout(5000);
@@ -25,7 +28,9 @@ public class HttpUtil {
                     OutputStream outStream = conn.getOutputStream();
                     outStream.write(entity);
                     if (conn.getResponseCode() == 200) {
-                        listener.onFinish(StreamTool.streamToString(conn.getInputStream()));
+                        String result = StreamTool.streamToString(conn.getInputStream());
+                        Log.i("接口返回数据：", result);
+                        listener.onFinish(result);
                     } else {
                         listener.onWarning("网络返回异常:" + conn.getResponseCode());
                     }

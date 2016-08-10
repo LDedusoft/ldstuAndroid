@@ -1,6 +1,7 @@
 package com.ldedusoft.ldstu.viewpagerfragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 
 import com.ldedusoft.ldstu.R;
 import com.ldedusoft.ldstu.component.iconfont.IconfontView;
+import com.ldedusoft.ldstu.model.RaceQuery;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +74,30 @@ public class FragmentMainActivity extends FragmentActivity {
 		viewPager.setAdapter(new MyPagerAdapter());
 
 		viewPager.setCurrentItem(1);//直接跳到第二个页面
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if(data==null){
+			return;
+		}
+		switch (requestCode) {
+			case 1: //选择比赛
+				RaceQuery race = (RaceQuery)data.getSerializableExtra("item");
+				Fragment fragment = fragments.get(2);
+				TextView name = (TextView)fragment.getView().findViewById(R.id.kaoshi_mingcheng);
+				name.setText(race.TestId);
+				break;
+			case 2: //选择学校
+
+				String school = data.getStringExtra("item");
+				int position = data.getIntExtra("position",0);
+				UserInfoFragment fragment0 = (UserInfoFragment)fragments.get(0);
+				fragment0.setSchool(school, position);
+				break;
+			default:
+				break;
+		}
 	}
 
 	/**
@@ -133,6 +159,8 @@ public class FragmentMainActivity extends FragmentActivity {
 			Animation animation = null;
 			switch (arg0) {
 			case 0:
+//				UserInfoFragment fragment0 = (UserInfoFragment)fragments.get(0);
+//				fragment0.initData();
 				mTab1.setTextColor(getResources().getColor(R.color.bootomBarTextSelected));
 				if (currIndex == 1) {
 					animation = new TranslateAnimation(one, 0, 0, 0);
@@ -159,6 +187,8 @@ public class FragmentMainActivity extends FragmentActivity {
 				}
 				break;
 			case 2:
+				ExaminationFragment fragment2 = (ExaminationFragment)fragments.get(2);
+				fragment2.setUserRealName();
 				mTab3.setTextColor(getResources().getColor(R.color.bootomBarTextSelected));
 				if (currIndex == 0) {
 					animation = new TranslateAnimation(zero, two, 0, 0);
@@ -172,6 +202,8 @@ public class FragmentMainActivity extends FragmentActivity {
 				}
 				break;
 			case 3:
+				RaceFragment fragment3 = (RaceFragment)fragments.get(3);
+				fragment3.getData("");
 				mTab4.setTextColor(getResources().getColor(R.color.bootomBarTextSelected));
 				if (currIndex == 0) {
 					animation = new TranslateAnimation(zero, three, 0, 0);

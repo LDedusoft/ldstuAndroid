@@ -13,6 +13,10 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="CheckBoxStyleSavePsd" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/check_style_savepsd</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

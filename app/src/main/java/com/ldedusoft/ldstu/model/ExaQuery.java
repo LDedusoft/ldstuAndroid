@@ -5,8 +5,9 @@ package com.ldedusoft.ldstu.model;
  * Created by wangjianwei on 2016/7/29.
  */
 public class ExaQuery {
-    public String name;
-    public String time;
-    public String score;
-    public String type;
+    public String raceName;
+    public String sjName;
+    public String exaTime;
+    public String exaScore;
+    public String exaZScore;
 }

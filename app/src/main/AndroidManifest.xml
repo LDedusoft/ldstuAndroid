@@ -42,6 +42,19 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+        <activity android:name=".activity.RaceSelectActivity">
+            <intent-filter>
+                <action android:name="activity.RaceSelectActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.SchoolSelectActivity">
+            <intent-filter>
+                <action android:name="activity.SchoolSelectActivity"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
 
 
 

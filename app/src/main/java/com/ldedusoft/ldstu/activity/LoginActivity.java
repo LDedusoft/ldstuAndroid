@@ -1,5 +1,6 @@
 package com.ldedusoft.ldstu.activity;
 
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
@@ -36,6 +38,9 @@ import com.ldedusoft.ldstu.viewpagerfragment.FragmentMainActivity;
  */
 public class LoginActivity extends com.ldedusoft.ldstu.activity.BaseActivity implements View.OnClickListener,AdapterView.OnItemSelectedListener {
 
+    private final String CONFIG_SAVEPASSWORD = "config_savePassword";
+    private final String CONFIG_USERNAME = "config_username";
+    private final String CONFIG_PASSWORD = "config_password";
     private EditText username;
     private EditText password;
     private Button loginBtn;
@@ -43,10 +48,13 @@ public class LoginActivity extends com.ldedusoft.ldstu.activity.BaseActivity imp
     private String paramXml;
     private Spinner loginTypeSpinner;
     private ArrayAdapter<String> mAdapter ;
-    private int loginResult; //登录返回值
+    private String loginResult; //登录返回值
     private ProgressDialog progressDialog;
     private SharedPreferences pref; //保存文件
     private SharedPreferences.Editor editor;
+    private CheckBox savePassword;
+    private Button offLine;
+    private Button register;
 
 
     /**
@@ -65,13 +73,27 @@ public class LoginActivity extends com.ldedusoft.ldstu.activity.BaseActivity imp
      * 初始化登录页面
      */
     private void initLoginPage(){
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
         mainLayout = (LinearLayout)findViewById(R.id.root_layout);
         username = (EditText)findViewById(R.id.edittext_username);
         password = (EditText)findViewById(R.id.edittext_password);
         loginTypeSpinner = (Spinner)findViewById(R.id.spinner_loginType);
+        offLine = (Button)findViewById(R.id.login_offline);
+        offLine.setOnClickListener(this);
+        register = (Button)findViewById(R.id.login_register);
+        register.setOnClickListener(this);
         loginBtn = (Button)findViewById(R.id.btn_login);
         loginBtn.setOnClickListener(this);
         username.setSelection(username.getText().length());
+        savePassword = (CheckBox)findViewById(R.id.login_savePassword);
+        username.setText(pref.getString(CONFIG_USERNAME, ""));
+        String savePd = pref.getString(CONFIG_SAVEPASSWORD,"");
+        if("true".equals(savePd)){
+            savePassword.setChecked(true);
+            password.setText(pref.getString(CONFIG_PASSWORD,""));
+        }else{
+            savePassword.setChecked(false);
+        }
 
         //注册下拉列表监听器
         loginTypeSpinner.setOnItemSelectedListener(this);
@@ -115,9 +137,22 @@ public class LoginActivity extends com.ldedusoft.ldstu.activity.BaseActivity imp
                             "请输入密码!", Toast.LENGTH_SHORT).show();
                     password.findFocus();
                 }else {
-//                    ldbmLogin();
-                    loginSuccess();
+                    ldbmLogin();
+//                    loginSuccess();
                 }
+                break;
+            case R.id.login_register:
+                Toast.makeText(this,"暂未开放",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.login_offline:
+                if(TextUtils.isEmpty(username.getText())){
+                    Toast.makeText(LoginActivity.this.getApplicationContext(),
+                            "需要输入用户名!", Toast.LENGTH_SHORT).show();
+                    username.findFocus();
+                }
+                SysProperty.offLineModel = true;
+                loginSuccess();
+                break;
 
         }
     }
@@ -135,8 +170,8 @@ public class LoginActivity extends com.ldedusoft.ldstu.activity.BaseActivity imp
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        loginResult = Integer.parseInt(ParseXML.getItemValueWidthName(response, "LoginResult"));
-                        if (loginResult == -1) {
+                        loginResult = ParseXML.getItemValueWidthName(response, "LoginResult");
+                        if ("false".equals(loginResult)||TextUtils.isEmpty(loginResult)) {
                             //登录失败方法
                             loginError();
                         } else {
@@ -176,19 +211,32 @@ public class LoginActivity extends com.ldedusoft.ldstu.activity.BaseActivity imp
 
     private void loginSuccess(){
         closeProgressDialog();
+        editor = pref.edit();
+        //保存用户名
+        editor.putString(CONFIG_USERNAME,username.getText().toString());
+        if(!SysProperty.offLineModel) {
+            //// TODO: 2016/8/1 保存密码
+            String savePd;
+            if (savePassword.isChecked()) {
+                savePd = "true";
+            } else {
+                savePd = "false";
+            }
+            editor.putString(CONFIG_SAVEPASSWORD, savePd);
+            editor.putString(CONFIG_PASSWORD, password.getText().toString());
+            editor.commit();
+        }
         String selectedType = loginTypeSpinner.getSelectedItem().toString();
         SysProperty.getInstance().setMode(selectedType);
         UserProperty.getInstance().setUserName(username.getText().toString());
         UserProperty.getInstance().setPassWord(password.getText().toString());
-        UserProperty.getInstance().setUserType(loginResult);
+        UserProperty.getInstance().setUserType(1);//设置用户类型。默认1，暂时不需要。
         pref = PreferenceManager.getDefaultSharedPreferences(this);
-//        editor = pref.edit();
-//        editor.putString(username.getText().toString()+"_wrong","");
-//        editor.putString(username.getText().toString()+"_wrong_idList","");
-//        editor.putString(username.getText().toString()+"_favorite","");
-//        editor.putString(username.getText().toString()+"_favorite_idList","");
-//        editor.commit();
-        Log.d("LoginActivity", username.getText().toString() + "登录");
+        if(SysProperty.offLineModel){
+            Log.d("LoginActivity", username.getText().toString() + "离线登录");
+        }else{
+            Log.d("LoginActivity", username.getText().toString() + "登录");
+        }
         Intent intent = new Intent(LoginActivity.this, FragmentMainActivity.class);
         startActivity(intent);
 

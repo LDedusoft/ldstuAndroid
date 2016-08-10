@@ -5,6 +5,7 @@
     <string name="input_password">密码</string>
     <string name="button_login">登录</string>
     <string name="btn_forgetPsd">忘记密码？</string>
+    <string name="btn_logo_text">龙鼎科技</string>
     <string name="bottom_bar_home">首页</string>
 
     <string name="menu_item_top">置顶</string>

@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@color/commonQueryConditionBackground"
+        android:visibility="gone"
         >
         <!--左侧条件-->
         <LinearLayout
@@ -32,33 +33,9 @@
                 android:id="@+id/common_query_timeCondition"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/commonQuery_condition_height">
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    >
-                    <TextView
-                        android:text="比赛名称"
-                        android:textSize="@dimen/commonQuery_condition_textsize"
-                        android:textColor="@color/inputListItemText"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical|left"
-                        android:layout_weight="1"
-                        android:paddingLeft="10dp"
-                        />
-                    <EditText
-                        android:id="@+id/race_mingcheng"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent"
-                        android:textSize="@dimen/commonQuery_condition_textsize"
-                        android:textColor="@color/commonQueryConditionText"
-                        android:textColorHint="@color/inputListItemHint"
-                        android:gravity="center_vertical|left"
-                        />
-                </LinearLayout>
+                android:layout_height="@dimen/commonQuery_condition_height"
+                >
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

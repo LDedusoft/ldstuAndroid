@@ -12,8 +12,14 @@ public class SysProperty {
 
     private static SysProperty sysp;
 
+    public ArrayList<ExeModel> exeList_sys;
     /*登录模式*/
     private String mode;
+
+    /*离线模式*/
+    public static boolean offLineModel=false;
+
+    public static final String CONFIG_EXETYPE = "config_exeType";
 
     /*全部菜单*/
     private ArrayList<MenuItem> AllMenuList;
@@ -40,14 +46,17 @@ public class SysProperty {
     private LinkedHashMap<String,String> reportKeyDic;
 
     public LinkedHashMap<String, String> getReportKeyDic() {
+        //{"UserName":"用户名","KSPWD":"密码","StudentName":"姓名","StudentSex":"性别","SchoolName":"学校","HeadImage":"头像"}
         LinkedHashMap<String,String> dic = new LinkedHashMap<String,String>();
-        dic.put("用户信息user","用户");
-        dic.put("用户信息name","考生姓名");
-        dic.put("用户信息bianhao","考生编号");
-        dic.put("用户信息xuexiao","学校");
-        dic.put("用户信息banji","班级");
-        dic.put("用户信息xingbie","性别");
-        dic.put("用户信息nianling","年龄");
+        dic.put("用户信息UserName","用户");
+        dic.put("用户信息KSPWD","密码");
+//        dic.put("用户信息KSPWD_QR","确认密码");
+        dic.put("用户信息StudentName","考生姓名");
+//        dic.put("用户信息bianhao","考生编号");
+        dic.put("用户信息SchoolName","学校");
+//        dic.put("用户信息banji","班级");
+        dic.put("用户信息StudentSex","性别");
+//        dic.put("用户信息nianling","年龄");
         reportKeyDic = dic;
         return reportKeyDic;
     }

@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class RaceQueryAdapter extends ArrayAdapter<RaceQuery> {
     private int resourceId;
-    private TextView raceName,raceTime,raceType,raceScore,raceRounds;
+    private TextView raceName,raceTime,raceXianshi,raceScore,raceRounds;
     private LinearLayout raceTypeLayout;
     private Context mContext;
     private RaceQuery item;
@@ -41,14 +41,14 @@ public class RaceQueryAdapter extends ArrayAdapter<RaceQuery> {
         if(item!=null){
             raceName = (TextView)view.findViewById(R.id.race_query_name);
             raceTime = (TextView)view.findViewById(R.id.race_query_time);
-            raceType = (TextView)view.findViewById(R.id.race_query_type);
+            raceXianshi = (TextView)view.findViewById(R.id.race_query_xianshi);
             raceScore = (TextView)view.findViewById(R.id.race_query_score);
             raceRounds = (TextView)view.findViewById(R.id.race_query_rounds);
-            raceName.setText(item.name);
-            raceTime.setText(item.time);
-            raceType.setText(item.type);
-            raceScore.setText(item.score);
-            raceRounds.setText(item.rounds);
+            raceName.setText(item.Name);
+            raceTime.setText(item.StartTime);
+            raceXianshi.setText(item.LimitTime);
+            raceScore.setText(item.Qzfen);
+            raceRounds.setText(item.TestId);
         }
         return view;
     }

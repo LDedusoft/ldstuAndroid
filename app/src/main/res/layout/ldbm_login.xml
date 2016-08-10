@@ -72,7 +72,7 @@
                         android:textColor="@color/loginText"
                         android:textColorHint="@color/loginText"
                         android:textSize="15dp"
-                        android:text="李涛"
+                        android:text="LD00050002"
                         android:hint="@string/input_userName" />
 
                     <RelativeLayout
@@ -90,7 +90,7 @@
                 android:layout_weight="1"
                 android:orientation="horizontal"
                 android:gravity="left"
-                android:paddingRight="10dp"
+                android:paddingRight="20dp"
                 >
                 <RelativeLayout
                     android:layout_width="1dp"
@@ -102,10 +102,10 @@
 
                     />
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="45dp"
                     android:orientation="vertical"
-                    android:layout_marginRight="10dp"
                     >
                     <EditText
                         android:id="@+id/edittext_password"
@@ -116,18 +116,33 @@
                         android:cursorVisible="true"
                         android:gravity="center_vertical"
                         android:layout_marginLeft="15dp"
-                        android:textColor="@color/loginText"
-                        android:textColorHint="@color/loginText"
+                        android:textColor="@color/loginEditText"
+                        android:textColorHint="@color/loginHintText"
                         android:inputType="textPassword"
                         android:textSize="15dp"
-                        android:text="123456"
                         android:hint="@string/input_password" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
+                        android:layout_height="1dp"
                         android:background="@color/loginLine"
                         android:layout_marginLeft="10dp"
+                        android:layout_gravity="bottom"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="25dp"
+                    android:layout_height="45dp"
+                    android:orientation="vertical"
+                    >
+                    <CheckBox
+                        android:id="@+id/login_savePassword"
+                        style="@style/CheckBoxStyleSavePsd"
+                        android:layout_width="25dp"
+                        android:layout_height="43dp" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/loginLine"
                         android:layout_gravity="bottom"/>
                 </LinearLayout>
             </LinearLayout>
@@ -202,10 +217,10 @@
                     android:id="@+id/btn_forgetPsd"
                     android:layout_width="150dp"
                     android:layout_height="40dp"
-                    android:text="@string/btn_forgetPsd"
+                    android:text="@string/btn_logo_text"
                     android:gravity="center_horizontal|center_vertical"
                     android:textSize="13sp"
-                    android:textColor="@color/loginText"
+                    android:textColor="@color/loginLine"
                     />
 
             </LinearLayout>
@@ -225,7 +240,8 @@
                 android:layout_gravity="bottom"
                 >
                 <Button
-                    android:text="演示账号"
+                    android:text="离线练习"
+                    android:id="@+id/login_offline"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_alignParentBottom="true"
@@ -238,6 +254,7 @@
 
                 <Button
                     android:text="立即注册"
+                    android:id="@+id/login_register"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_alignParentBottom="true"

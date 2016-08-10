@@ -23,6 +23,7 @@ import com.ldedusoft.ldstu.component.customComp.TopBar;
 import com.ldedusoft.ldstu.component.iconfont.IconfontView;
 import com.ldedusoft.ldstu.interfaces.FormToolBarListener;
 import com.ldedusoft.ldstu.model.ExeModel;
+import com.ldedusoft.ldstu.model.SysProperty;
 import com.ldedusoft.ldstu.model.UserProperty;
 import com.ldedusoft.ldstu.util.HttpCallbackListener;
 import com.ldedusoft.ldstu.util.HttpUtil;
@@ -43,9 +44,9 @@ public class AnswerActivity extends BaseActivity{
     private final String EXE_TYPE_NORMAL = "normal";
     private final String EXE_TYPE_WRONG = "wrong";
     private final String EXE_TYPE_FAVORITE = "favorite";
-    private final String EXE_TYPE_DANXUAN = "danxuan";
-    private final String EXE_TYPE_DUOXUAN = "duoxuan";
-    private final String EXE_TYPE_SHIFEI = "shifei";
+    private final String EXE_TYPE_DANXUAN = "单选题";
+    private final String EXE_TYPE_DUOXUAN = "多选题";
+    private final String EXE_TYPE_SHIFEI = "是非题";
     private SharedPreferences pref; //保存文件
     private SharedPreferences.Editor editor;
     private ExeModel exeModel,exeModelTemp;
@@ -56,14 +57,15 @@ public class AnswerActivity extends BaseActivity{
     private RadioGroup radioGroup;
     private CheckBox checkA,checkB,checkC,checkD;
     private TextView radioSubmit,checkSubmit,typeIcon,lastExe,nextExe,dangQian,zhengQue,delText,favText;
-    private int pageNumber = 1;
+    private int pageNumber = 0;
     private String selected;
     private String param;
     private int exeCount = 0;//总题数
     private int thisId = 0; //当前题位置
     private ArrayList<ExeModel> exeList;
     private String title;
-    private String category;
+    private String type = "";
+    private String category = "";
     final int RIGHT = 0;
     final int LEFT = 1;
     private IconfontView delIcon,favIcon;
@@ -74,19 +76,21 @@ public class AnswerActivity extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a_answer);
+        SysProperty.getInstance().exeList_sys = new ArrayList<ExeModel>();
         gestureDetector = new GestureDetector(AnswerActivity.this,onGestureListener);
         Intent intent= getIntent();
         param = intent.getStringExtra("param"); //模式
         title = intent.getStringExtra("title"); //标题
-        category = intent.getStringExtra("category"); //分类
+        type = intent.getStringExtra("type"); //试题类型
+        category = intent.getStringExtra("category"); //知识类型
         if (TextUtils.isEmpty(category)){
-            category = EXE_TYPE_NORMAL;
+//            category = EXE_TYPE_NORMAL;
         }
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         initView();
         if(EXE_TYPE_NORMAL.equals(param)) { //普通模式
             model = EXE_TYPE_NORMAL;
-            getNormalExeData(category);
+            getNormalExeData();
         }else if(EXE_TYPE_WRONG.equals(param)){//错题模式
             model = EXE_TYPE_WRONG;
             delLayout.setVisibility(View.VISIBLE);
@@ -436,13 +440,17 @@ public class AnswerActivity extends BaseActivity{
         }
         if(EXE_TYPE_NORMAL.equals(param)) { //随机练习
             exeModelTemp = exeModel;
-            exeModel = InterfaceResault.getExercises(pageNumber-1,category);
+//            exeModel = InterfaceResault.getExercises(pageNumber-1,category);
+//              getNormalExeData();
+            exeModel = getExeModelFromLocalList(--pageNumber); //从本地缓存的试题列表里取试题
             if(exeModel==null){
+                pageNumber = 0;
                 exeModel = exeModelTemp;//恢复试题数据
                 Toast.makeText(AnswerActivity.this,"当前是第一题",Toast.LENGTH_SHORT).show();
+                initData();
                 return;
             }else{
-                pageNumber--;//当前页码减1
+                initData();
             }
         }
         if(EXE_TYPE_WRONG.equals(param)||EXE_TYPE_FAVORITE.equals(param)){//错题练习,收藏练习
@@ -464,14 +472,20 @@ public class AnswerActivity extends BaseActivity{
         }
         exeModelTemp = exeModel;
         if(EXE_TYPE_NORMAL.equals(param)) {//随机练习
-            exeModel = InterfaceResault.getExercises(pageNumber+1,category);
-            if(exeModel==null){
-                exeModel = exeModelTemp;
-                Toast.makeText(AnswerActivity.this,"当前是最后一题",Toast.LENGTH_SHORT).show();
-                return;
+//            exeModel = InterfaceResault.getExercises(pageNumber+1,category);
+            exeModel = getExeModelFromLocalList(++pageNumber); //从本地缓存的试题列表里取试题
+            if(exeModel==null) {
+                getNormalExeData();
             }else{
-                pageNumber++;//当前页码加1
+                initData();
             }
+//            if(exeModel==null){
+//                exeModel = exeModelTemp;
+//                Toast.makeText(AnswerActivity.this,"当前是最后一题",Toast.LENGTH_SHORT).show();
+//                return;
+//            }else{
+//                pageNumber++;//当前页码加1
+//            }
         }
         if(EXE_TYPE_WRONG.equals(param)||EXE_TYPE_FAVORITE.equals(param)){//错题练习,收藏练习
             if(thisId==exeList.size()-1){
@@ -480,8 +494,24 @@ public class AnswerActivity extends BaseActivity{
             }
             thisId++;
             exeModel = exeList.get(thisId);
+            initData();
         }
-        initData();
+
+    }
+
+    /**
+     * 从本地缓存获取上一题和下一题
+     * */
+    private ExeModel getExeModelFromLocalList(int page){
+        ExeModel exeModel = null;
+        if(page==-1){
+            return exeModel;
+        }
+        try{
+            exeModel = SysProperty.getInstance().exeList_sys.get(page);
+        }catch (Exception e){
+        }
+            return exeModel;
     }
 
     /*保存到本地*/
@@ -533,17 +563,17 @@ public class AnswerActivity extends BaseActivity{
            }
 
            JSONObject jsonObject = new JSONObject();
-           jsonObject.put("id",exeModel.id);
-           jsonObject.put("type",exeModel.type);
-           jsonObject.put("category",exeModel.category);
-           jsonObject.put("answer", exeModel.answer);
-           jsonObject.put("content", exeModel.content);
+           jsonObject.put("ID",exeModel.id);
+           jsonObject.put("TypeName",exeModel.type);
+           jsonObject.put("Result", exeModel.answer);
+           jsonObject.put("Content", exeModel.content);
+//           jsonObject.put("category",exeModel.category);
 //           jsonObject.put("difficulty",exeModel.difficulty);
 //           jsonObject.put("mark",exeModel.mark);
-           jsonObject.put("optionA",exeModel.optionA);
-           jsonObject.put("optionB", exeModel.optionB);
-           jsonObject.put("optionC",exeModel.optionC);
-           jsonObject.put("optionD",exeModel.optionD);
+           jsonObject.put("Option1",exeModel.optionA);
+           jsonObject.put("Option2", exeModel.optionB);
+           jsonObject.put("Option3",exeModel.optionC);
+           jsonObject.put("Option4",exeModel.optionD);
            jsonArray.put(jsonObject);
            newExeStr = jsonArray.toString();
            exeStrIdList+=","+exeModel.id;
@@ -563,9 +593,13 @@ public class AnswerActivity extends BaseActivity{
     }
 
     /*获取随机练习题*/
-    private void getNormalExeData(final String category){
+    private void getNormalExeData(){
+        if(SysProperty.offLineModel){
+            showNoExe();
+            return;
+        }
         String serverPath = InterfaceParam.SERVER_PATH;
-        String paramXml = InterfaceParam.getInstance().getExercises(UserProperty.getInstance().getUserName());
+        String paramXml = InterfaceParam.getInstance().getExercises(type,category);
         HttpUtil.sendHttpRequest(serverPath, paramXml, new HttpCallbackListener() {
             @Override
             public void onFinish(final String response) {
@@ -575,15 +609,12 @@ public class AnswerActivity extends BaseActivity{
                         String result = ParseXML.getItemValueWidthName(response, InterfaceResault.exeResult);
                         if (TextUtils.isEmpty(result)) {
                             //失败方法
-//                            Toast.makeText(AnswerActivity.this, "获取数据失败", Toast.LENGTH_SHORT).show();
-                            //测试模式
-                            Toast.makeText(AnswerActivity.this, "测试模式模拟数据", Toast.LENGTH_SHORT).show();
-                            exeModel = InterfaceResault.getExercises(pageNumber, category);
-                            favLayout.setVisibility(View.VISIBLE);
-                            initData();
+                            Toast.makeText(AnswerActivity.this, "获取数据失败", Toast.LENGTH_SHORT).show();
+//                            initData();
                         } else {
                             //成功方法
-                            exeModel = InterfaceResault.getExercises(pageNumber, category);
+                            exeModel = InterfaceResault.getExercises(result);
+                            SysProperty.getInstance().exeList_sys.add(exeModel);
                             favLayout.setVisibility(View.VISIBLE);
                             initData();
                         }
@@ -592,9 +623,13 @@ public class AnswerActivity extends BaseActivity{
                 });
             }
             @Override
-            public void onWarning(String warning) {}
+            public void onWarning(String warning) {
+                Log.i("网络请求异常",warning);
+            }
             @Override
-            public void onError(Exception e) {}
+            public void onError(Exception e) {
+                Log.i("网络请求错误",e.getMessage());
+            }
         });
 
     }
@@ -620,17 +655,17 @@ public class AnswerActivity extends BaseActivity{
                 for (int i=0;i<jsonArray.length();i++){
                     JSONObject jsonObject = (JSONObject)jsonArray.get(i);
                     ExeModel exeModel = new ExeModel();
-                    exeModel.id = Integer.parseInt(jsonObject.getString("id"));
-                    exeModel.type = jsonObject.getString("type");
-                    exeModel.category = jsonObject.getString("category");
-                    exeModel.optionA = jsonObject.getString("optionA");
-                    exeModel.optionB = jsonObject.getString("optionB");
-                    exeModel.optionC = jsonObject.getString("optionC");
-                    exeModel.optionD = jsonObject.getString("optionD");
-                    exeModel.answer = jsonObject.getString("answer");
-                    exeModel.content = jsonObject.getString("content");
-//                    exeModel.difficulty = jsonObject.getString("difficulty");
-//                    exeModel.mark = jsonObject.getString("mark");
+                    exeModel.id = Integer.parseInt(jsonObject.getString("ID"));
+                    exeModel.type = jsonObject.getString("TypeName");
+                    exeModel.optionA = jsonObject.getString("Option1");
+                    exeModel.optionB = jsonObject.getString("Option2");
+                    exeModel.optionC = jsonObject.getString("Option3");
+                    exeModel.optionD = jsonObject.getString("Option4");
+                    exeModel.answer = jsonObject.getString("Result");
+                    exeModel.content = jsonObject.getString("Content");
+//                  exeModel.category = jsonObject.getString("category");
+//                  exeModel.difficulty = jsonObject.getString("difficulty");
+//                  exeModel.mark = jsonObject.getString("mark");
                     exeList.add(exeModel);
                     if (i==0){
                         this.exeModel = exeModel;

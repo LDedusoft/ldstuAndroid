@@ -42,4 +42,7 @@
     <color name="toast_back_color">#bbe5e7e9</color><!--toast-->
     <color name="toast_text_color">#ec2e3448</color><!--toast-->
     <color name="kaoshi_line">#ec969696</color><!--考试查询页面分割线-->
+    <color name="userInfo_text_color">#394f64</color><!--用户信息文字颜色-->
+    <color name="loginEditText">#7a7b7c</color><!-- 登录页面文字颜色-->
+    <color name="loginHintText">#b5bccc</color><!-- 登录页面提示文字颜色-->
 </resources>
