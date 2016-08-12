@@ -76,6 +76,7 @@ public class FragmentMainActivity extends FragmentActivity {
 		viewPager.setCurrentItem(1);//直接跳到第二个页面
 	}
 
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(data==null){
@@ -138,10 +139,10 @@ public class FragmentMainActivity extends FragmentActivity {
 
 	}
 
-	private void hiddenKB(View v){
+	private void hiddenKB(){
 		InputMethodManager imm = (InputMethodManager)this.getSystemService(Context.INPUT_METHOD_SERVICE);
 		if (imm != null) {
-			imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+			imm.hideSoftInputFromWindow(this.viewPager.getWindowToken(), 0);
 		}
 	}
 
@@ -155,7 +156,7 @@ public class FragmentMainActivity extends FragmentActivity {
 	public class MyOnPageChangeListener implements OnPageChangeListener {
 		@Override
 		public void onPageSelected(int arg0) {
-//			hiddenKB();
+			hiddenKB();
 			Animation animation = null;
 			switch (arg0) {
 			case 0:
