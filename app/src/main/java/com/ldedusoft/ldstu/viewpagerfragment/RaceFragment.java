@@ -125,23 +125,23 @@ public class RaceFragment extends Fragment {
 		String date = sDateFormat.format(new java.util.Date());
 		timeText.setText(date);
 
-		timeText.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-//				nameEdit.clearFocus();
-				hiddenKB(v);
-				Calendar c = Calendar.getInstance();
-				new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
-					@Override
-					public void onDateSet(DatePicker dp, int year, int mounth, int day) {
-						timeText.setText(year + "-" + (mounth + 1) + "-" + day);
-					}
-				},
-				c.get(Calendar.YEAR),
-				c.get(Calendar.MONTH),
-				c.get(Calendar.DAY_OF_MONTH)).show();
-			}
-		});
+//		timeText.setOnClickListener(new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+////				nameEdit.clearFocus();
+//				hiddenKB(v);
+//				Calendar c = Calendar.getInstance();
+//				new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+//					@Override
+//					public void onDateSet(DatePicker dp, int year, int mounth, int day) {
+//						timeText.setText(year + "-" + (mounth + 1) + "-" + day);
+//					}
+//				},
+//				c.get(Calendar.YEAR),
+//				c.get(Calendar.MONTH),
+//				c.get(Calendar.DAY_OF_MONTH)).show();
+//			}
+//		});
 		submitBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
